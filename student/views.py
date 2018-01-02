@@ -88,7 +88,8 @@ class student_list_json(BaseDatatableView):
                 # item.course,
                 item.get_course_display(),
                 str(item.pk),
-                reverse_lazy('student_detail',kwargs={'pk': str(item.pk)})
+                #reverse_lazy('student_detail',kwargs={'pk': str(item.pk)})
+                reverse_lazy('student_home'),
             ])
             # print(json_data)
         return json_data
