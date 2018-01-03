@@ -11,12 +11,15 @@ from django.db.models import Count, Sum, Q, Case, Value, When, IntegerField
 
 # Create your views here.
 
+@login_required(login_url='/accounts/login/')
 def home(request):
   return render(request,'base.html')
 
+@login_required(login_url='/accounts/login/')
 def home_json(request):
     return render(request, 'student/home_json.html')
 
+@login_required(login_url='/accounts/login/')
 def student_new(request):
 
     if request.method == "POST":
@@ -32,10 +35,12 @@ def student_new(request):
     print(request.user)
     return render(request, 'student/student_new.html', {'form': form})
 
+@login_required(login_url='/accounts/login/')
 def student_detail(request,pk):
     student = get_object_or_404(Student, pk=pk)
     return render(request, 'student/student_detail.html', {'student': student})
 
+@login_required(login_url='/accounts/login/')
 def student_edit(request,pk):
 
     student = get_object_or_404(Student, pk=pk)
@@ -53,6 +58,7 @@ def student_edit(request,pk):
     
     return render(request, 'student/student_edit.html', {'form': form})
 
+@login_required(login_url='/accounts/login/')
 def student_remove(request,pk):
 
     student = get_object_or_404(Student, pk=pk)
@@ -72,11 +78,14 @@ def student_remove(request,pk):
 class student_list_json(BaseDatatableView):
     order_columns = ['icnum','name','course', 'pk','link']
 
+
+    
     def get_initial_queryset(self):
         # icnum = self.request.GET.get(u'icnum', '')
         # return Student.objects.filter(icnum=icnum)
         return Student.objects.all().order_by('icnum')
 
+    
     def filter_queryset(self, qs):
 
         # Getting advanced filtering indicators for dataTables 1.10.13
@@ -128,7 +137,7 @@ class student_list_json(BaseDatatableView):
         # print 'sortdir + sortcol : ' + sortdir + sortcol
         return qs.order_by(sortdir + sortcol)
         # return qs
-
+   
     def prepare_results(self, qs):
         # prepare list with output column data
         # queryset is already paginated here
