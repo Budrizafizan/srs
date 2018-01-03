@@ -4,6 +4,7 @@
 
 
 {% block content %}
+
   <legend>Student Registration System</legend>
   <div class="table-responsive">
   <table id="example" class="stripe">
@@ -22,10 +23,9 @@
     <a href="{% url 'student_home' %}" class="btn btn-primary" >Add New Student</a>
   </p>
 
-{% endblock %}
+  {% endblock %}
 
-
-{% block head_datatables_js %}    
+  {% block head_datatables_js %}    
   <script src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>  
 {% endblock %}
 
